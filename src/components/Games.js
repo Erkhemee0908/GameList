@@ -1,5 +1,4 @@
 import GameList from '../GameList.json'
-import './Games.css';
 import { styled } from '@mui/material/styles';
 import { ButtonBase, Grid, Link } from '@mui/material';
 import Typography from '@mui/material/Typography';
