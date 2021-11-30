@@ -11,3 +11,5 @@ Data from https://www.freetogame.com/api/games
     ###### Note: on Windows you can Shift+RightClick where you want to open a command line and click (Open PowerShell here).
 4. Run `npm install` to install the dependencies.
 5. Finally run `npm start` to open.
+
+###### in `./src` there is `Extra.js` where I put the extra problem
