@@ -1,7 +1,9 @@
-import GameList from '../GameList.json'
 import { styled } from '@mui/material/styles';
 import { Grid, Link, } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import { useState, useEffect } from "react";
+import axios from 'axios';
+import GameList from '../GameList.json'
 
 
 const Img = styled('img')({
@@ -11,10 +13,48 @@ const Img = styled('img')({
     maxHeight: '100%',
 });
 
-const listGames = () => (
+const GetGames = () => {
+    const [games, setGames] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const [error, setError] = useState(null);
 
-    GameList.games.map((game) => (
-        <Grid container spacing={2} margin={2} width={"90%"}>
+    // This should get the games from theAPI
+    // Unfortunatly i'm getting an error
+    // blocked by CORS policy
+    useEffect(() => {
+        axios.get(`https://www.freetogame.com/api/games`)
+            .then(
+                (result) => {
+                    setIsLoaded(true);
+                    setGames(result);
+                },
+                (error) => {
+                    setIsLoaded(true);
+                    setError(error);
+                }
+            )
+    }, [])
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    } else if (!isLoaded) {
+        return <div>Loading...</div>;
+    } else {
+        return (
+            listGames(games)
+        )
+    }
+}
+
+
+
+
+
+const listGames = () => {
+
+
+    return GameList.games.map((game) => (
+        <Grid key={game.id} container spacing={2} margin={2} width={"90%"}>
 
             <Grid item>
                 <Link href={game.freetogame_profile_url} underline="none" color="inherit">
@@ -51,14 +91,15 @@ const listGames = () => (
             </Grid>
         </Grid>
     ))
-)
+}
 
 const Games = () => {
+
     return (
         <>
-            {
-                listGames()
-            }
+
+            {/* {GetGames()} */}
+            {listGames()}
         </>
 
     )
