@@ -1,9 +1,14 @@
 import './App.css';
 import Games from './components/Games'
+import AppBar from './components/AppBar'
+
 
 function App() {
   return (
-    <Games />
+    <>
+      <AppBar />
+      <Games />
+    </>
   );
 }
 

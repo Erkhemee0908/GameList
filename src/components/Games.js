@@ -1,6 +1,6 @@
 import GameList from '../GameList.json'
 import { styled } from '@mui/material/styles';
-import { ButtonBase, Grid, Link } from '@mui/material';
+import { Grid, Link, } from '@mui/material';
 import Typography from '@mui/material/Typography';
 
 
@@ -14,7 +14,7 @@ const Img = styled('img')({
 const listGames = () => (
 
     GameList.games.map((game) => (
-        <Grid container spacing={2} margin={2}>
+        <Grid container spacing={2} margin={2} width={"90%"}>
 
             <Grid item>
                 <Link href={game.freetogame_profile_url} underline="none" color="inherit">
@@ -25,29 +25,26 @@ const listGames = () => (
             <Grid item xs={12} sm container>
                 <Grid item xs container direction="column" spacing={2}>
                     <Grid item xs>
-                        <Typography gutterBottom variant="subtitle1" component="div">
+                        <Typography gutterBottom variant="h4" component="div">
                             {game.title}
                         </Typography>
-                        <Typography variant="body2" gutterBottom>
+                        <Typography variant="body1" gutterBottom>
                             {game.short_description}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            ID: {game.id}
+                            <b>Genre:</b> {game.genre}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Genre: {game.genre}
+                            <b>Platform:</b> {game.platform}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Platform: {game.platform}
+                            <b>Publisher:</b> {game.publisher}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Publisher: {game.publisher}
+                            <b>Developer:</b> {game.developer}
                         </Typography>
                         <Typography variant="body2" color="text.secondary">
-                            Developer: {game.developer}
-                        </Typography>
-                        <Typography variant="body2" color="text.secondary">
-                            Release date: {game.release_date}
+                            <b>Release date:</b> {game.release_date}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -59,9 +56,6 @@ const listGames = () => (
 const Games = () => {
     return (
         <>
-            <h1>
-                Free Games List
-            </h1>
             {
                 listGames()
             }
