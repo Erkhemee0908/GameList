@@ -1,6 +1,8 @@
 # Free-to-Play game list
 ### by Eric
 
+Visit at https://874a6e7a.freegamelist.pages.dev/
+
 Data from https://www.freetogame.com/api/games
 
 ## Set-Up
