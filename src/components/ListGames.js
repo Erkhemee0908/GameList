@@ -3,6 +3,7 @@ import Typography from '@mui/material/Typography';
 import { Grid, Link, styled } from '@mui/material';
 
 import { platformContext, categoryContext, sortContext } from "./Context";
+import GameList from '../GameList.json'
 
 const Img = styled('img')({
     margin: 'auto',
@@ -11,7 +12,7 @@ const Img = styled('img')({
     maxHeight: '100%',
 });
 
-export const ListGames = async () => {
+export const ListGames = () => {
 
     const { platform } = useContext(platformContext);
 
@@ -20,7 +21,7 @@ export const ListGames = async () => {
     const { sort } = useContext(sortContext);
 
 
-    let games = await fetch('https://get-free-games.erkhemee09083428.workers.dev/');
+    let games = GameList.games;
 
     games = games.filter(a => a.platform.includes(platform))
 
