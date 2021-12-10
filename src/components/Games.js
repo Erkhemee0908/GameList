@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
-import { useState } from "react";
-// import axios from 'axios';
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
 import { platformContext, categoryContext, sortContext } from './Context';
 
@@ -8,41 +8,21 @@ import { Platform } from './filter/Platform';
 import { Category } from './filter/Category';
 import { Sort } from './filter/Sort';
 import { ListGames } from './ListGames';
+// import GameList from '../GameList.json'
 
+const GetGames = () => {
+    const [games, setGames] = useState([])
 
+    useEffect(() => {
+        // GET request using axios inside useEffect React hook
+        axios.get('http://localhost:8080/')
+            .then(response => setGames(response.data));
 
-// const GetGames = () => {
-//     const [games, setGames] = useState([]);
-//     const [isLoaded, setIsLoaded] = useState(false);
-//     const [error, setError] = useState(null);
+        // empty dependency array means this effect will only run once (like componentDidMount in classes)
+    }, []);
 
-//     // This should get the games from theAPI
-//     // Unfortunatly i'm getting an error
-//     // blocked by CORS policy
-//     useEffect(() => {
-//         axios.get(`https://www.freetogame.com/api/games`)
-//             .then(
-//                 (result) => {
-//                     setIsLoaded(true);
-//                     setGames(result);
-//                 },
-//                 (error) => {
-//                     setIsLoaded(true);
-//                     setError(error);
-//                 }
-//             )
-//     }, [])
-
-//     if (error) {
-//         return <div>Error: {error.message}</div>;
-//     } else if (!isLoaded) {
-//         return <div>Loading...</div>;
-//     } else {
-//         return (
-//             ListGames(games)
-//         )
-//     }
-// }
+    return ListGames(games);
+}
 
 
 
@@ -59,14 +39,16 @@ const Games = () => {
 
 
 
+
+
     return (
         <>
             <sortContext.Provider value={so}>
                 <categoryContext.Provider value={cat}>
                     <platformContext.Provider value={plat}>
                         <Bar />
-                        {/* {GetGames()} */}
-                        <ListGames />
+                        {GetGames()}
+                        {/* {ListGames(games)} */}
                     </platformContext.Provider>
                 </categoryContext.Provider>
             </sortContext.Provider>

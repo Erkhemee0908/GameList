@@ -3,7 +3,6 @@ import Typography from '@mui/material/Typography';
 import { Grid, Link, styled } from '@mui/material';
 
 import { platformContext, categoryContext, sortContext } from "./Context";
-import GameList from '../GameList.json'
 
 const Img = styled('img')({
     margin: 'auto',
@@ -12,7 +11,7 @@ const Img = styled('img')({
     maxHeight: '100%',
 });
 
-export const ListGames = () => {
+export const ListGames = (param) => {
 
     const { platform } = useContext(platformContext);
 
@@ -21,7 +20,7 @@ export const ListGames = () => {
     const { sort } = useContext(sortContext);
 
 
-    let games = GameList.games;
+    let games = param
 
     games = games.filter(a => a.platform.includes(platform))
 
